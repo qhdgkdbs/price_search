@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from selenium import webdriver
 import xlsxwriter
+from time import sleep
 
 # 크롬 드라이버 가져오기
 driver = webdriver.Chrome('/Users/bonghayun/Desktop/project/python/python_excel_miele/chromedriver')
@@ -63,7 +64,10 @@ for n,index in enumerate(lines):
     #저장된 data에서 가장 최신 정보 중 url에 접속해서 스크롤을 아래로 쭉 해(html파일 로딩을 위해서)
     driver.get(data[n][3])
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    #컴퓨터가 html파일을 전부 가져오지 못해서 html을 전부 가져오기 위해 0.1초의 시간을 줌!
+    sleep(0.1)
     html = driver.page_source
+
     soup = BeautifulSoup(html, 'html.parser')
 
     #크롤링한 html파일에 가격정보가 몇개가 들어있는지 파악
