@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>399</width>
-    <height>187</height>
+    <height>166</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,19 +24,6 @@
    </property>
    <property name="text">
     <string>START</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_ship">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>60</y>
-     <width>271</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>배송비 정보 파일 열기</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_base">
@@ -56,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>90</y>
+     <y>60</y>
      <width>271</width>
      <height>32</height>
     </rect>
@@ -69,7 +56,7 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>120</y>
+     <y>90</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -87,24 +74,11 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QProgressBar" name="progressBar">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>150</y>
-     <width>261</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="value">
-    <number>24</number>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>170</y>
+     <y>150</y>
      <width>161</width>
      <height>16</height>
     </rect>
@@ -119,6 +93,40 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="now_data">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>130</y>
+     <width>181</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hello</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>120</y>
+     <width>241</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>29</pointsize>
+    </font>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
  </widget>
