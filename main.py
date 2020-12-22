@@ -6,7 +6,7 @@ from time import sleep
 import re
 
 # 크롬 드라이버 가져오기
-driver = webdriver.Chrome('/Users/bonghayun/Desktop/project/python/python_excel_miele/chromedriver')
+driver = webdriver.Chrome('./chromedriver')
 
 # 엑셀 파일 지정 & 쉬트지 열기
 workbook = xlsxwriter.Workbook('price.xlsx')
@@ -40,7 +40,7 @@ worksheet.freeze_panes(1, 1)
 data = []
 
 # url.txt 파일이을 열고 띄어쓰기 단위로 모델명 가격1 가격2 url을 가져옴
-f = open("url.txt", "r")
+f = open("url_test.txt", "r")
 lines = f.read().split('\n')
 f.close()
 
