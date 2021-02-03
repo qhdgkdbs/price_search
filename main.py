@@ -27,7 +27,12 @@ except:
     sleep(5)
     sys.exit()
 
-def set_form():
+def get_review(START_DATE, END_DATE, self):
+    cannot_get = []
+
+    # 크롬 드라이버 가져오기
+    driver = webdriver.Chrome('./src/chromedriver')
+
     # 엑셀 파일 지정 & 쉬트지 열기
     # 제목에 날짜
     workbook_title = "./review/review_from_" +str(START_DATE) +"_to_"+ str(END_DATE) + ".xlsx"
@@ -74,12 +79,6 @@ def set_form():
     worksheet.freeze_panes(1, 1)
     worksheet.set_column(4, 4, 60)
 
-    return worksheet
-
-
-
-
-
     #정보가 들어갈 2차원 배열, url.txt에서 가져온 정보를 여기에 주입할 것임
     data = []
 
@@ -93,11 +92,6 @@ def set_form():
 
     # url.txt에서 가져온 정보가 [제품명 원부코드, ...] 이런식으로 저장되어있음,
     # index에는 "제품명 가격1 가격2 url" 이렇게 들어있고
-
-def set_form():
-    # 크롬 드라이버 가져오기
-    driver = webdriver.Chrome('./src/chromedriver')
-    
     for n,index in enumerate(lines):
 
         # lines[0] 의 정보 중에서 불필요한 \n을 제거
@@ -126,6 +120,7 @@ def set_form():
                 sleep(SCROLL_PAUSE_TIME)
         except:
             print(data[n][0] + "제품이 없습니다.")
+            cannot_get.append(data[n][0])
 
 
         html = driver.page_source
@@ -192,8 +187,7 @@ def set_form():
         # for i in range(1,7):
         #     worksheet.write(row, i, " ", title_cell) #상품명
         # row = row + 1
-
-        self.showProgress.append(data[n][0].upper())
+        
 
         for i in range(0, len(data_arr)):
             if(data_arr[i][3] > START_DATE and data_arr[i][3] < END_DATE):
@@ -221,4 +215,6 @@ def set_form():
 
     driver.close()
     workbook.close()
+
+    return cannot_get
 

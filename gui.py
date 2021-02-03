@@ -1,34 +1,14 @@
 import sys
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from PyQt5 import uic
 import main as review
+import os
 
-driver = webdriver.Chrome('./src/chromedriver')
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 form_class = uic.loadUiType("main.ui")[0]
-
-# ////////////////////////////////////////////////////////////////
-# 시작 종료 날짜
-START_DATE = 210101
-END_DATE = 210203
-
-if(START_DATE > END_DATE and START_DATE == END_DATE):
-    print("시작 날짜가 마지막 날짜보다 같거나 작을 수 없습니다.")
-    print("5초 후에 프로그램이 종료 됩니다.")
-    sleep(5)
-    sys.exit()
-
-try:
-    START_DATE = int(START_DATE)
-    END_DATE = int(END_DATE)
-except:
-    print("날짜 값이 이상합니다(숫자만 입력하세요).")
-    print("5초 후에 프로그램이 종료 됩니다.")
-    sleep(5)
-    sys.exit()
-# ////////////////////////////////////////////////////////////////
 
 
 
@@ -41,19 +21,52 @@ class WindowClass(QMainWindow, form_class) :
         self.openRAW.clicked.connect(self.openRAWFunc)
         self.run.clicked.connect(self.runFunc)
         self.clear.clicked.connect(self.clearFunc)
+        self.openFolder.clicked.connect(self.openFolderFunc)
+
+        self.currentDate = QDate.currentDate()
+        self.END_DATE.setDate(self.currentDate)
+
+    def openFolderFunc(self):
+        print("open folder!!!")
+        self.showProgress.append("폴더 엽니다!!!")
+        path = "./review"
+        path = os.path.realpath(path)
+        os.startfile(path)
 
     def openRAWFunc(self):
         print("open")
-        self.showProgress.append("open Text")
+        self.showProgress.append("텍스트 파일을 엽니다!!!")
+        os.system("start ./src/pd_info.txt")
+
 
     def runFunc(self):
-        print("run")
-        self.showProgress.append("run")
-        worksheet = review.set_form()
-        self.showProgress.append("Finish Set Form")
-        lines = review.get_data_from_txt()
-        self.showProgress.append("Finish Get Data From txt")
+        START_DATE = self.START_DATE.date().toString("yyyyMMdd")
+        END_DATE = self.END_DATE.date().toString("yyyyMMdd")
 
+        print(START_DATE)
+        print(END_DATE)
+
+        if(START_DATE > END_DATE and START_DATE == END_DATE):
+            print("시작 날짜가 마지막 날짜보다 같거나 작을 수 없습니다.")
+            print("5초 후에 프로그램이 종료 됩니다.")
+            sleep(5)
+            sys.exit()
+
+        try:
+            START_DATE = int(START_DATE)
+            END_DATE = int(END_DATE)
+        except:
+            print("날짜 값이 이상합니다(숫자만 입력하세요).")
+            print("5초 후에 프로그램이 종료 됩니다.")
+            sleep(5)
+            sys.exit()
+
+        print("run")
+        self.showProgress.append("실행합니다. 기다려주세요!")
+        no_data = review.get_review(START_DATE, END_DATE, self)
+        self.showProgress.append("finish")
+        for data in no_data:
+            self.showProgress.append(data + "상품은 정보를 가져올 수 없습니다.")
         
     
     def clearFunc(self):
