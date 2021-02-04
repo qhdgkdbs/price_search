@@ -8,25 +8,6 @@ from time import sleep
 import re
 import sys
 
-# 시작 종료 날짜
-START_DATE = 210101
-END_DATE = 210203
-
-if(START_DATE > END_DATE and START_DATE == END_DATE):
-    print("시작 날짜가 마지막 날짜보다 같거나 작을 수 없습니다.")
-    print("5초 후에 프로그램이 종료 됩니다.")
-    sleep(5)
-    sys.exit()
-
-try:
-    START_DATE = int(START_DATE)
-    END_DATE = int(END_DATE)
-except:
-    print("날짜 값이 이상합니다(숫자만 입력하세요).")
-    print("5초 후에 프로그램이 종료 됩니다.")
-    sleep(5)
-    sys.exit()
-
 def get_review(START_DATE, END_DATE, self):
     cannot_get = []
 
@@ -190,7 +171,8 @@ def get_review(START_DATE, END_DATE, self):
         
 
         for i in range(0, len(data_arr)):
-            if(data_arr[i][3] > START_DATE and data_arr[i][3] < END_DATE):
+
+            if(data_arr[i][3] >= START_DATE and data_arr[i][3] <= END_DATE):
                 # print(data_arr[i][0])
 
                 # worksheet.set_column(col + 1, cell_format=data_format2)
@@ -207,14 +189,14 @@ def get_review(START_DATE, END_DATE, self):
                 row = row + 1
 
 
+
     #3번쨰 컬럼 서식 (differ 값 구하는 식)
     # for row_num in range(1, 100):
     #     worksheet.write_formula(row_num-1, 3,
     #                             '= -$C%d + $E%d' % (row_num, row_num))
 
-
-    driver.close()
     workbook.close()
+    driver.close()
 
     return cannot_get
 

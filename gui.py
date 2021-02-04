@@ -8,7 +8,7 @@ import os
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-form_class = uic.loadUiType("main.ui")[0]
+form_class = uic.loadUiType("./src/main.ui")[0]
 
 
 
@@ -40,8 +40,8 @@ class WindowClass(QMainWindow, form_class) :
 
 
     def runFunc(self):
-        START_DATE = self.START_DATE.date().toString("yyyyMMdd")
-        END_DATE = self.END_DATE.date().toString("yyyyMMdd")
+        START_DATE = self.START_DATE.date().toString("yyMMdd")
+        END_DATE = self.END_DATE.date().toString("yyMMdd")
 
         print(START_DATE)
         print(END_DATE)
