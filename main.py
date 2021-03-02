@@ -67,7 +67,7 @@ def get_review(START_DATE, END_DATE, self):
     # f = open("url_test.txt", "r")
     # lines = f.read().split('\n')
     # f.close()
-    with open('./src/pd_info.txt', encoding='utf-8') as f:
+    with open('./src/pd_info_test.txt', encoding='utf-8') as f:
         lines = f.read().split('\n')
 
 
@@ -199,4 +199,9 @@ def get_review(START_DATE, END_DATE, self):
     driver.close()
 
     return cannot_get
+
+data = get_review("201101","20210302",self)
+
+print(data)
+
 
